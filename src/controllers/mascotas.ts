@@ -1,3 +1,4 @@
+import mascotasModelo from "../models/mascotas";
 import { Request, Response } from "express";
 
 export class mascotaController{
@@ -5,7 +6,8 @@ export class mascotaController{
 
     async create(req:Request,res:Response){
         try {
-            res.status(201).json({status:"create-ok"});
+            const data = mascotasModelo.create(req.body);
+            res.status(201).json(data);
         } catch (error) {
             res.status(500).send(error);
         }
