@@ -1,6 +1,5 @@
+import 'dotenv/config';
 import { MongoClient, Db } from "mongodb";
-import dotenv from "dotenv";
-dotenv.config();
 class dbClient{
     client: MongoClient;
     db!: Db;
