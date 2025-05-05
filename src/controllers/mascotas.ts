@@ -6,7 +6,7 @@ export class mascotaController{
 
     async create(req:Request,res:Response){
         try {
-            const data = mascotasModelo.create(req.body);
+            const data = await mascotasModelo.create(req.body);
             res.status(201).json(data);
         } catch (error) {
             res.status(500).send(error);
@@ -15,7 +15,9 @@ export class mascotaController{
 
     async update(req:Request,res:Response){
         try {
-            res.status(201).json({status:"update-ok"});
+            const {id} = req.params;
+            const data = await mascotasModelo.update(id,req.body)
+            res.status(200).json(data);
         } catch (error) {
             res.status(500).send(error);
         }
@@ -23,7 +25,9 @@ export class mascotaController{
 
     async delete(req:Request,res:Response){
         try {
-            res.status(201).json({status:"delete-ok"});
+            const {id} = req.params;
+            const data = await mascotasModelo.delete(id)
+            res.status(201).json(data);
         } catch (error) {
             res.status(500).send(error);
         }
@@ -31,7 +35,9 @@ export class mascotaController{
 
     async getOne(req:Request,res:Response){
         try {
-            res.status(201).json({status:"getOne-ok"});
+            const {id} = req.params;
+            const data = await mascotasModelo.getOne(id);
+            res.status(201).json(data);
         } catch (error) {
             res.status(500).send(error);
         }
@@ -39,7 +45,8 @@ export class mascotaController{
     
     async getAll(req:Request,res:Response){
         try {
-            res.status(201).json({status:"getAll-ok"});
+            const data = await mascotasModelo.getAll();
+            res.status(201).json(data);
         } catch (error) {
             res.status(500).send(error);
         }
