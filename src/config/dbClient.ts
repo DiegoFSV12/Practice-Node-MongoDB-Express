@@ -1,23 +1,25 @@
 import 'dotenv/config';
 import { MongoClient, Db } from "mongodb";
+import mongoose, { Mongoose } from 'mongoose';
 class dbClient{
-    client: MongoClient;
-    db!: Db;
     constructor(){
-        const query:string=`mongodb+srv://${process.env.USER_DB}:${process.env.USER_PASS}@tutorialpets.18uveho.mongodb.net/?retryWrites=true&w=majority&appName=TutorialPets`;
-        this.client = new MongoClient(query);
-        this.connectBD();
+        this.connect();
     }
 
-    async connectBD(){
+    async connect(){
+        const query:string=`mongodb+srv://${process.env.USER_DB}:${process.env.USER_PASS}@tutorialpets.18uveho.mongodb.net/adopcion?retryWrites=true&w=majority`;
+        await mongoose.connect(query);
+        console.log("Conectado a la BD");
+    }
+
+    async disconnect(){
         try {
-            await this.client.connect();
-            this.db = this.client.db("adopcion");
-            console.log("Conectado a la BD");
+            await mongoose.disconnect();
+            console.log("Conexión a la BD cerrada");
         } catch (error) {
-            console.log(error);
+            console.log("Error al cerrar la conexión: ",error);
         }
     }
 }
 
-export default new dbClient;
+export default new dbClient();
