@@ -1,5 +1,4 @@
-import { ObjectId } from "mongodb";
-import dbClient from "../config/dbClient";
+import Mascotas from "../schemas/mascotas"
 
 interface Mascota{
     nombre:string,
@@ -10,24 +9,19 @@ interface Mascota{
 
 class mascotasModelo{
     async create(mascota:Mascota){
-        const colMascotas = dbClient.db.collection('mascotas');
-        return await colMascotas.insertOne(mascota);
+        return await Mascotas.create(mascota);
     }
     async getOne(id:string){
-        const colMascotas = dbClient.db.collection('mascotas');
-        return await colMascotas.findOne({_id:new ObjectId(id)});
+        return await Mascotas.findById(id);
     }
     async getAll(){
-        const colMascotas = dbClient.db.collection('mascotas');
-        return await colMascotas.find({}).toArray();
+        return await Mascotas.find();
     }
     async update(id:string,mascota:Mascota){
-        const colMascotas = dbClient.db.collection('mascotas');
-        return await colMascotas.updateOne({_id:new ObjectId(id)},{$set:mascota});
+        return await Mascotas.findOneAndUpdate({_id:id},{$set:mascota},{new:true});
     }
     async delete(id:string){
-        const colMascotas = dbClient.db.collection('mascotas');
-        return await colMascotas.deleteOne({_id:new ObjectId(id)});
+        return await Mascotas.findOneAndDelete({_id:id});
     }
 }
 export default new mascotasModelo();
