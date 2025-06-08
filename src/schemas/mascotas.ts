@@ -16,13 +16,15 @@ const mascotaSchema = new mongoose.Schema(
         },
         edad:{
             type:Number,
-            required:true
+            required:true,
+            min: [0,"La edad no puede ser negativa"]
         },
         descripcion:{
             type:String
         },
         adoptado:{
-            type:Boolean
+            type:Boolean,
+            default: false
         }
     },{timestamps:true}
 );
