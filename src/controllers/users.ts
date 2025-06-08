@@ -1,6 +1,8 @@
 import usuarioModelo from '../models/users'
 import { Request, Response } from "express";
+import {generateToken} from '../helpers/autenticacion';
 import bcrypt from 'bcrypt'
+import jsonwebtoken from 'jsonwebtoken'
 
 export class usuarioController{
     constructor(){}
@@ -40,7 +42,8 @@ export class usuarioController{
                 res.status(400).json({error: "Clave incorrecta"});
                 return;
             }
-            res.status(201).json({msg: "Usuario validado"});
+            const token = generateToken(email);
+            res.status(201).json({msg: "Usuario validado", token});
         } catch (error) {
             res.status(500).send(error);
         }
