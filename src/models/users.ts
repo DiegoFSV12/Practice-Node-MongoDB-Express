@@ -1,10 +1,10 @@
 import Users from "../schemas/users"
 
 interface User{
-    name:string,
-    email:string,
+    name?:string,
+    email?:string,
     phone?:string,
-    pass:string
+    pass?:string
 }
 
 
@@ -12,8 +12,8 @@ class usuarioModelo{
     async create(user:User){
         return await Users.create(user);
     }
-    async getOne(id:string){
-        return await Users.findById(id);
+    async getOne(user:User){
+        return await Users.findOne(user)
     }
     async getAll(){
         return await Users.find();
