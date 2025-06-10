@@ -48,5 +48,14 @@ export class usuarioController{
             res.status(500).send(error);
         }
     }
+
+    async getProfile(req:Request,res:Response){
+        try {
+            const data = await usuarioModelo.getOne({email:req.emailConected});
+            res.status(201).json({data});
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    }
 }
 export default new usuarioController();
