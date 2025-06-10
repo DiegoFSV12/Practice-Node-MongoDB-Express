@@ -2,14 +2,6 @@ import 'dotenv/config';
 import { NextFunction, Request, Response } from 'express';
 import jsonwebtoken from 'jsonwebtoken'
 
-declare global {
-  namespace Express {
-    interface Request {
-      emailConected?: string;
-    }
-  }
-}
-
 export function generateToken(email:string){
     return jsonwebtoken.sign({email},`${process.env.JWT_SECRET}`,{expiresIn: '1hr'});
 }

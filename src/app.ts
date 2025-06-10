@@ -1,4 +1,6 @@
 import {Server} from "./server";
+import './globals'; // 👈 ahora TypeScript incluirá tus declaraciones
+
 (()=>{
     main();
 })();
