@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
-import {routesMascotas,routesUsers} from "./routes/index";
+import {routesMascotas,routesUsers,productRoutes} from "./routes/index";
 import bodyParser from 'body-parser';
 import dbClient from './config/dbClient';
 
@@ -16,6 +16,7 @@ export class Server{
         
         this.app.use("/mascotas", routesMascotas);
         this.app.use("/users", routesUsers);
+        this.app.use("/products", productRoutes);
 
         process.on('SIGINT',async()=>{
             dbClient.disconnect();

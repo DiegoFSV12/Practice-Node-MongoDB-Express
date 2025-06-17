@@ -19,7 +19,7 @@ export function validateToken(req:Request, res:Response, next:NextFunction){
             return;
         }
         console.log(datatoken.email);
-        req.emailConected = datatoken.email;
+        req.emailConected = datatoken.email;//Atributo creado en types
         next(); //Esto hace que tras ejecutar la validación, pase a la siguiente función
     } catch (error) {
         res.status(401).json({error:"Token invalido"});
